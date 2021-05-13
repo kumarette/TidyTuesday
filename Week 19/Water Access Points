@@ -65,7 +65,7 @@ water_nigeria <- water %>%
                                         size = 0.5, linetype = "solid"))+
   scale_color_manual(values = c("#44bbff","#44ddff","#44ddff","#44eeff","#44eedd","#44eebb"), 
                      guide = guide_legend(override.aes = list(size = 4, alpha = 25)),name = "Water Sources in Nigeria")+ 
-  theme(legend.position = "right", legend.title = element_blank(),legend.key = element_rect(fill = "#fff7f2"))
+  theme(legend.position = "right",legend.key = element_rect(fill = "#fff7f2"))
 
 # Liberia
 
