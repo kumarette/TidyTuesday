@@ -1,0 +1,32 @@
+library(cartography)
+library(sf)
+library(mapsf)
+library(tidyverse)
+library(ggthemes)
+library(ggtext)
+
+Usa<- st_read("~/Documents/Maps/UScounties/UScounties.shp")
+
+
+#Download the data
+
+tuesdata <- tidytuesdayR::tt_load(2021, week = 20)
+broadband <- tuesdata$broadband
+broadband_zip <- tuesdata$broadband_zip
+
+broadband_mean <- broadband_zip %>% 
+  janitor::clean_names()%>% 
+  group_by(county_id) %>% 
+  summarise(broadband_usage = mean(broadband_usage))
+
+# rearrange Usa vector and join both vectors with broadband and map
+USA <- Usa %>% janitor::clean_names() %>% 
+  rename(county_id = fips) %>% 
+  mutate(county_id = as.double(county_id))
+  
+USA_broadband_usage <- inner_join(USA,broadband_mean)
+
+#The map
+mf_map(USA_broadband_usage, var = "broadband_usage", type = "choro", 
+       leg_pos = 'topleft', 
+       leg_title = "Broadband Usage per US County")
