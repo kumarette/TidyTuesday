@@ -29,4 +29,5 @@ USA_broadband_usage <- inner_join(USA,broadband_mean)
 #The map
 mf_map(USA_broadband_usage, var = "broadband_usage", type = "choro", 
        leg_pos = 'topleft', 
-       leg_title = "Broadband Usage per US County")
+       leg_title = "Broadband Usage per US County",
+       leg_title_cex = 1)
